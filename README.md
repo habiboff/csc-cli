@@ -71,7 +71,7 @@ Feel free to submit issues and enhancement requests.
 MIT
 
 ## Author
-[Your Name/Organization]
+Nahid Habibov
 
 ## Support
 For support, please create an issue in the repository.
