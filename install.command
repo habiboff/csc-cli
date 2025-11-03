@@ -35,27 +35,27 @@ fi
 
 # Clone template from the template repo
 echo "📥 Cloning template..."
-git clone https://github.com/habiboff/GIRDM.git "$PROJECT_NAME"
+git clone https://github.com/habiboff/CleanArch.git "$PROJECT_NAME"
 cd "$PROJECT_NAME"
 rm -rf .git
 
 # Rename files and directories
 echo "🔄 Renaming project files..."
-mv GIRDM.xcodeproj "${PROJECT_NAME}.xcodeproj"
-mv GIRDM "${PROJECT_NAME}"
+mv CleanArch.xcodeproj "${PROJECT_NAME}.xcodeproj"
+mv CleanArch "${PROJECT_NAME}"
 
 # Update references in project files
 echo "📝 Updating project references..."
-find . -type f -name "*.pbxproj" -exec sed -i '' "s/GIRDM/$PROJECT_NAME/g" {} +
-find . -type f -name "*.swift" -exec sed -i '' "s/GIRDM/$PROJECT_NAME/g" {} +
-find . -type f -name "*.plist" -exec sed -i '' "s/GIRDM/$PROJECT_NAME/g" {} +
-find . -type f -name "*.h" -exec sed -i '' "s/GIRDM/$PROJECT_NAME/g" {} +
-find . -type f -name "*.m" -exec sed -i '' "s/GIRDM/$PROJECT_NAME/g" {} +
+find . -type f -name "*.pbxproj" -exec sed -i '' "s/CleanArch/$PROJECT_NAME/g" {} +
+find . -type f -name "*.swift" -exec sed -i '' "s/CleanArch/$PROJECT_NAME/g" {} +
+find . -type f -name "*.plist" -exec sed -i '' "s/CleanArch/$PROJECT_NAME/g" {} +
+find . -type f -name "*.h" -exec sed -i '' "s/CleanArch/$PROJECT_NAME/g" {} +
+find . -type f -name "*.m" -exec sed -i '' "s/CleanArch/$PROJECT_NAME/g" {} +
 
 # Update bundle identifier
 echo "🔑 Updating bundle identifier..."
-find . -name "Info.plist" -exec sed -i '' "s/com.habiboff.GIRDM/$BUNDLE_ID/g" {} +
-find . -type f -name "*.pbxproj" -exec sed -i '' "s/com.habiboff.GIRDM/$BUNDLE_ID/g" {} +
+find . -name "Info.plist" -exec sed -i '' "s/com.habiboff.CleanArch/$BUNDLE_ID/g" {} +
+find . -type f -name "*.pbxproj" -exec sed -i '' "s/com.habiboff.CleanArch/$BUNDLE_ID/g" {} +
 
 echo -e "${GREEN}✅ Project successfully created: $PROJECT_NAME${NC}"
 echo "📱 Bundle ID: $BUNDLE_ID"
