@@ -1,19 +1,19 @@
 # CSC CLI
 
-A command-line tool for creating iOS projects with GIRDM template. This tool helps you quickly scaffold iOS projects with a predefined VMMMC architecture.
+A command-line tool for creating iOS UIKit projects with Clean Architecture template. This tool helps you quickly scaffold iOS projects with a predefined VMMMR generic structures.
 
 ## Features
-- Quick project setup with VMMMC architecture
+- Clean Architecture UIKit
+- Quick project setup with VMMMR structure
 - Automatic bundle identifier configuration
 - Clean and organized project structure
 - Ready-to-use networking and repository layers
 - Built-in routing system
-- State management implementation
 
 ## Requirements
 - macOS
-- Git
 - Xcode
+- Git
 
 ## Installation
 
@@ -35,7 +35,7 @@ csc-cli create ios-project --name MyAwesomeApp --bundle-id com.mycompany.awesome
 
 ## Project Structure
 The generated project will include:
-- VMMMC architecture setup
+- VMMMR and Clean Architecture setup
 - Common utilities
 - Main application flow
 - Routing system
