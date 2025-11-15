@@ -4,15 +4,15 @@
 GREEN='\033[0;32m'
 NC='\033[0m'
 
-# Permission check
-if [ "$EUID" -ne 0 ]; then 
-    echo "Please run with sudo:"
-    echo "curl -o- https://raw.githubusercontent.com/habiboff/csc-cli/main/install.command | sudo bash"
-    exit 1
-fi
+# Permission check (artık gerek yok, kullanıcı dizinine yazılıyor)
+# Ancak sudo ile çalıştırırsan yine de HOME korunacak şekilde
+
+# Ensure ~/bin exists
+BIN_DIR="$HOME/bin"
+mkdir -p "$BIN_DIR"
 
 # Create CLI tool
-cat > /usr/local/bin/csc-cli << 'EOF'
+cat > "$BIN_DIR/csc-cli" << 'EOF'
 #!/bin/bash
 
 if [ "$1" != "create" ] || [ "$2" != "ios-project" ]; then
@@ -79,7 +79,12 @@ echo "📂 Location: $(pwd)"
 EOF
 
 # Make CLI tool executable
-chmod +x /usr/local/bin/csc-cli
+chmod +x "$BIN_DIR/csc-cli"
 
-echo -e "${GREEN}✅ CSC CLI successfully installed!${NC}"
+echo -e "${GREEN}✅ CSC CLI successfully installed to $BIN_DIR!${NC}"
 echo "Usage: csc-cli create ios-project --name ProjectName [--bundle-id com.company.app]"
+echo ""
+echo "Not: Eğer komut çalışmazsa aşağıdaki satırı shell profil dosyana eklemen gerekebilir:"
+echo "export PATH=\"\$HOME/bin:\$PATH\""
+echo "veya terminale şunu yaz:"
+echo "export PATH=\"\$HOME/bin:\$PATH\""
