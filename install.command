@@ -16,7 +16,7 @@ cat > /usr/local/bin/csc-cli << 'EOF'
 #!/bin/bash
 
 if [ "$1" != "create" ] || [ "$2" != "ios-project" ]; then
-    echo "Usage: csc-cli create ios-project --name ProjectName --bundle-id com.company.app"
+    echo "Usage: csc-cli create ios-project --name ProjectName [--bundle-id com.company.app]"
     exit 1
 fi
 
@@ -28,9 +28,15 @@ while [[ $# -gt 0 ]]; do
     esac
 done
 
-if [ -z "$PROJECT_NAME" ] || [ -z "$BUNDLE_ID" ]; then
-    echo "Error: Project name and bundle ID are required!"
+if [ -z "$PROJECT_NAME" ]; then
+    echo "Error: Project name is required!"
     exit 1
+fi
+
+# If BUNDLE_ID is not given, generate from the project name
+if [ -z "$BUNDLE_ID" ]; then
+    SAFE_PROJECT_NAME=$(echo "$PROJECT_NAME" | tr -dc '[:alnum:]')
+    BUNDLE_ID="com.habiboff.${SAFE_PROJECT_NAME}"
 fi
 
 # Clone template from the template repo
@@ -57,6 +63,16 @@ echo "🔑 Updating bundle identifier..."
 find . -name "Info.plist" -exec sed -i '' "s/com.habiboff.CleanArch/$BUNDLE_ID/g" {} +
 find . -type f -name "*.pbxproj" -exec sed -i '' "s/com.habiboff.CleanArch/$BUNDLE_ID/g" {} +
 
+# Rename scheme file if exists and update its contents
+SCHEME_PATH="./${PROJECT_NAME}.xcodeproj/xcshareddata/xcschemes"
+OLD_SCHEME="${SCHEME_PATH}/CleanArch.xcscheme"
+NEW_SCHEME="${SCHEME_PATH}/${PROJECT_NAME}.xcscheme"
+if [ -f "$OLD_SCHEME" ]; then
+    mv "$OLD_SCHEME" "$NEW_SCHEME"
+    sed -i '' "s/CleanArch/$PROJECT_NAME/g" "$NEW_SCHEME"
+    echo "🛠️ Scheme dosyası güncellendi: $NEW_SCHEME"
+fi
+
 echo -e "${GREEN}✅ Project successfully created: $PROJECT_NAME${NC}"
 echo "📱 Bundle ID: $BUNDLE_ID"
 echo "📂 Location: $(pwd)"
@@ -66,4 +82,4 @@ EOF
 chmod +x /usr/local/bin/csc-cli
 
 echo -e "${GREEN}✅ CSC CLI successfully installed!${NC}"
-echo "Usage: csc-cli create ios-project --name ProjectName --bundle-id com.company.app"
+echo "Usage: csc-cli create ios-project --name ProjectName [--bundle-id com.company.app]"
