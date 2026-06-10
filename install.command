@@ -26,12 +26,12 @@ PROJECT_NAME="$2"
 
 if [ -z "$PROJECT_NAME" ]; then
     echo -e "${RED}Error: Project name is required!${NC}"
-    echo "Usage: csc-cli new ProjectName [--bundle-id com.company.app]"
     exit 1
 fi
 
 BUNDLE_ID="com.$(echo "$PROJECT_NAME" | tr '[:upper:]' '[:lower:]')"
 
+shift 2
 while [[ $# -gt 0 ]]; do
     case $1 in
         --bundle-id) BUNDLE_ID="$2"; shift 2 ;;
