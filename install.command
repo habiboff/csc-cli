@@ -4,6 +4,19 @@ GREEN='\033[0;32m'
 RED='\033[0;31m'
 NC='\033[0m'
 
+if [ "$EUID" -ne 0 ]; then
+    echo "Please run with sudo:"
+    echo "curl -o- https://raw.githubusercontent.com/habiboff/csc-cli/main/install.command | sudo bash"
+    exit 1
+fi
+
+cat > /usr/local/bin/csc-cli << 'EOF'
+#!/bin/bash
+
+GREEN='\033[0;32m'
+RED='\033[0;31m'
+NC='\033[0m'
+
 if [ "$1" != "new" ]; then
     echo "Usage: csc-cli new ProjectName [--bundle-id com.company.app]"
     exit 1
@@ -60,3 +73,8 @@ echo "📂 Location: $(pwd)"
 git init
 git add .
 git commit -m "Initial commit"
+EOF
+
+chmod +x /usr/local/bin/csc-cli
+echo -e "${GREEN}✅ CSC CLI successfully installed!${NC}"
+echo "Usage: csc-cli new ProjectName [--bundle-id com.company.app]"
