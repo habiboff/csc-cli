@@ -1,4 +1,4 @@
-# CSC CLI
+# iOS CLI
 A command-line tool for creating iOS UIKit projects with Clean Architecture template.
 
 ## Features
@@ -20,26 +20,26 @@ curl -o- https://raw.githubusercontent.com/habiboff/csc-cli/main/install.command
 ## Usage
 Create a new project:
 ```bash
-csc-cli new ProjectName
+ios new ProjectName
 ```
 
 With custom bundle ID:
 ```bash
-csc-cli new ProjectName --bundle-id com.company.app
+ios new ProjectName --bundle-id com.company.app
 ```
 
 Example:
 ```bash
-csc-cli new MyAwesomeApp
-# Bundle ID will be: com.app
+ios new MyAwesomeApp
+# Bundle ID will be: com.myawesomeapp
 
-csc-cli new MyAwesomeApp --bundle-id com.app.myawesomeapp
-# Bundle ID will be: com.app.myawesomeapp
+ios new MyAwesomeApp --bundle-id com.habiboff.myawesomeapp
+# Bundle ID will be: com.habiboff.myawesomeapp
 ```
 
 ## Uninstallation
 ```bash
-sudo rm -f /usr/local/bin/csc-cli
+sudo rm -f /usr/local/bin/ios
 ```
 
 ## Common Issues
