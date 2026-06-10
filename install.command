@@ -9,8 +9,8 @@ if [ "$EUID" -ne 0 ]; then
     exit 1
 fi
 
-curl -o /usr/local/bin/csc-cli https://raw.githubusercontent.com/habiboff/csc-cli/main/csc-cli
-chmod +x /usr/local/bin/csc-cli
+curl -o /usr/local/bin/ios https://raw.githubusercontent.com/habiboff/csc-cli/main/ios
+chmod +x /usr/local/bin/ios
 
-echo -e "${GREEN}✅ CSC CLI successfully installed!${NC}"
-echo "Usage: csc-cli new ProjectName [--bundle-id com.company.app]"
+echo -e "${GREEN}✅ iOS CLI successfully installed!${NC}"
+echo "Usage: ios new ProjectName [--bundle-id com.company.app]"
