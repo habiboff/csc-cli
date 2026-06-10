@@ -51,7 +51,7 @@ find . -type f -name "*.swift" -exec sed -i '' "s/TemplateProject/$PROJECT_NAME/
 find . -type f -name "*.plist" -exec sed -i '' "s/TemplateProject/$PROJECT_NAME/g" {} +
 
 echo "🔑 Updating bundle identifier..."
-find . -type f -name "*.pbxproj" -exec sed -i '' "s/com.habiboff.TemplateProject/$BUNDLE_ID/g" {} +
+find . -type f -name "*.pbxproj" -exec sed -i '' "s/com\.habiboff\.[a-zA-Z]*/$BUNDLE_ID/g" {} +
 
 echo -e "${GREEN}✅ Project successfully created: $PROJECT_NAME${NC}"
 echo "📱 Bundle ID: $BUNDLE_ID"
